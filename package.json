@@ -4,7 +4,8 @@
   "description": "JS solutions for Advent of Code",
   "main": "index.js",
   "scripts": {
-    "test": "tests"
+    "test": "tests",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
