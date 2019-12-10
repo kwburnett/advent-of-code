@@ -1,0 +1,19 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "JS solutions for Advent of Code",
+  "main": "index.js",
+  "scripts": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kwburnett/advent-of-code.git"
+  },
+  "author": "Kevin B",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kwburnett/advent-of-code/issues"
+  },
+  "homepage": "https://github.com/kwburnett/advent-of-code#readme"
+}
