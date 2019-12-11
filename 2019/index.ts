@@ -1,3 +1,6 @@
+import * as days from './days';
+
 export function start() {
-  console.log("success!");
+	days.day01.a();
+	days.day01.b();
 }
