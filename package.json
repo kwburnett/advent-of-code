@@ -24,5 +24,10 @@
     "ts-node": "^8.5.4",
     "tslib": "^1.10.0",
     "typescript": "^3.7.3"
+  },
+  "dependencies": {
+    "@types/line-reader": "0.0.28",
+    "line-reader": "^0.4.0",
+    "md5": "^2.2.1"
   }
 }
