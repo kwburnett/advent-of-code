@@ -1,0 +1,1 @@
+export const dataDirectory: string = `${__dirname}\\data`;

@@ -1,20 +1,25 @@
+import { once } from 'events';
+import { createReadStream } from 'fs';
+import { createInterface } from 'readline';
 
-import lineReader from 'line-reader';
+export async function getDataFromFile(fileName: string): Promise<string[]> {
+  const data: string[] = [];
+  try {
+    const rl = createInterface({
+      input: createReadStream(fileName),
+      crlfDelay: Infinity
+    });
 
-// const dataDirectory: string = "";
+    rl.on('line', line => {
+      data.push(line);
+    });
 
-export function getDataFromFile(fileName: string): string[] {
-	const data: string[] = [];
+    await once(rl, 'close');
+  } catch (err) {
+    console.error(err);
+  }
 
-	try {
-		lineReader.eachLine(fileName, (line: string): void => {
-			data.push(line);
-		});
-	} catch (e) {
-		e.printStackTrace();
-	}
-
-	return data;
+  return data;
 }
 
 export const hexArray: string[] = '0123456789abcdef'.split('');
@@ -30,37 +35,37 @@ export const hexArray: string[] = '0123456789abcdef'.split('');
 // }
 
 export function getStateString(state: number[]): string {
-	return state.map(toString).join();
+  return state.map(toString).join();
 }
 
 export function convertToGrid(num: number): number[] {
-	const grid: number[] = [0, 0];
-	if (num === 0) {
-		return grid;
-	}
+  const grid: number[] = [0, 0];
+  if (num === 0) {
+    return grid;
+  }
 
-	let currentNumber = num;
-	let radix = 4;
-	let index = 0;
-	while (Math.pow(radix, index) <= currentNumber) {
-		index++;
-	}
-	index--;
-	while (currentNumber != 0) {
-		// const remainder: number = currentNumber & radix;
-		grid[1 - index] = Math.floor(currentNumber / Math.pow(radix, index));
-		currentNumber = currentNumber % Math.pow(radix, index);
-		index--;
-	}
+  let currentNumber = num;
+  let radix = 4;
+  let index = 0;
+  while (Math.pow(radix, index) <= currentNumber) {
+    index++;
+  }
+  index--;
+  while (currentNumber != 0) {
+    // const remainder: number = currentNumber & radix;
+    grid[1 - index] = Math.floor(currentNumber / Math.pow(radix, index));
+    currentNumber = currentNumber % Math.pow(radix, index);
+    index--;
+  }
 
-	return grid;
+  return grid;
 }
 
 export function convertFromGrid(grid: number[]): number {
-	let num: number = 0;
-	const radix: number = 4;
-	for (let i: number = 0; i < grid.length; i++) {
-		num += Math.pow(radix, grid.length - i - 1) * grid[i];
-	}
-	return num;
+  let num: number = 0;
+  const radix: number = 4;
+  for (let i: number = 0; i < grid.length; i++) {
+    num += Math.pow(radix, grid.length - i - 1) * grid[i];
+  }
+  return num;
 }
